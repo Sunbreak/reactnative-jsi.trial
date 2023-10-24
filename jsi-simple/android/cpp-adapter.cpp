@@ -2,7 +2,8 @@
 #include "react-native-jsi-simple.h"
 
 extern "C"
-JNIEXPORT jdouble JNICALL
-Java_com_jsisimple_JsiSimpleModule_nativeMultiply(JNIEnv *env, jclass type, jdouble a, jdouble b) {
-    return jsisimple::multiply(a, b);
+JNIEXPORT void JNICALL
+Java_com_jsisimple_JsiSimpleModule_nativeInstall(JNIEnv *env, jclass type, jlong jsContext) {
+    auto runtime = reinterpret_cast<facebook::jsi::Runtime *>(jsContext);
+    jsisimple::install(*runtime);
 }
