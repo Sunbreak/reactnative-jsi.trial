@@ -1,8 +1,9 @@
 # Projects
 
-|            | type          | languages             |
-|------------|---------------|-----------------------|
-| cpp-simple | Native module | C++ for Android & iOS |
+|            | type                              | languages             |
+|------------|-----------------------------------|-----------------------|
+| cpp-simple | Native module                     | C++ for Android & iOS |
+| cpp-compat | Turbo module with backward compat | C++ for Android & iOS |
 
 # How to run
 
