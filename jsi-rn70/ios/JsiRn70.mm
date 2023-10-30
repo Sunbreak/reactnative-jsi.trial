@@ -1,19 +1,24 @@
 #import "JsiRn70.h"
+#import "jsi/jsi.h"
+#import <React/RCTBridge+Private.h>
+
+using namespace facebook::jsi;
 
 @implementation JsiRn70
+
+@synthesize bridge = _bridge;
+
 RCT_EXPORT_MODULE()
 
-// Example method
-// See // https://reactnative.dev/docs/native-modules-ios
-RCT_EXPORT_METHOD(multiply:(double)a
-                  b:(double)b
-                  resolve:(RCTPromiseResolveBlock)resolve
-                  reject:(RCTPromiseRejectBlock)reject)
-{
-    NSNumber *result = @(a * b);
-
-    resolve(result);
++ (BOOL)requiresMainQueueSetup {
+    return YES;
 }
 
+- (void)setBridge:(RCTBridge *)bridge {
+    _bridge = bridge;
+    RCTCxxBridge *cxxBridge = (RCTCxxBridge *)bridge;
+    Runtime &runtime = *(Runtime *)cxxBridge.runtime;
+    jsirn70::install(runtime);
+}
 
 @end
