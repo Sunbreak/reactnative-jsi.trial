@@ -7,6 +7,7 @@
 | cpp-turbo  | Turbo module                      | C++ for Android & iOS |
 | jsi-simple | Native module                     | C++ for Android & iOS |
 | jsi-rn69   | Native module                     | Java & Objective-C    |
+| jsi-rn70   | Native module                     | Java & Objective-C    |
 
 # How to run
 
