@@ -22,11 +22,9 @@ public class JsiRn69Module extends ReactContextBaseJavaModule {
     return NAME;
   }
 
-
-  // Example method
-  // See https://reactnative.dev/docs/native-modules-android
-  @ReactMethod
-  public void multiply(double a, double b, Promise promise) {
-    promise.resolve(a * b);
+  static {
+    System.loadLibrary("cpp");
   }
+
+  public static native void nativeInstall(long jsContext);
 }

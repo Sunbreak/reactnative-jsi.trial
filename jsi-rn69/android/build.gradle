@@ -47,12 +47,36 @@ android {
     }
   }
 
+  ndkVersion getExtOrDefault("ndkVersion")
   compileSdkVersion getExtOrIntegerDefault("compileSdkVersion")
 
   defaultConfig {
     minSdkVersion getExtOrIntegerDefault("minSdkVersion")
     targetSdkVersion getExtOrIntegerDefault("targetSdkVersion")
 
+  externalNativeBuild {
+      def appProject = rootProject.allprojects.find { it.plugins.hasPlugin('com.android.application') }
+      def reactAndroidProject = project(':ReactAndroid')
+      ndkBuild {
+        arguments "APP_PLATFORM=android-21",
+                  "APP_STL=c++_shared",
+                  "NDK_TOOLCHAIN_VERSION=clang",
+                  "PROJECT_BUILD_DIR=${appProject.buildDir}", // for REACT_NDK_EXPORT_DIR in ReactAndroid's Android-prebuilt.mk
+                  "REACT_ANDROID_DIR=${reactAndroidProject.projectDir}"
+                  "REACT_ANDROID_BUILD_DIR=${reactAndroidProject.buildDir}"
+        cppFlags "-O2 -frtti -fexceptions -Wall -fstack-protector-all"
+      }
+    }
+  }
+
+  externalNativeBuild {
+    ndkBuild {
+      path "Android.mk"
+    }
+  }
+
+  packagingOptions {
+    exclude "**/libjsi.so"
   }
 
   buildTypes {
@@ -84,3 +108,9 @@ dependencies {
   implementation "com.facebook.react:react-native:+"
 }
 
+if (isNewArchitectureEnabled()) {
+  react {
+    // Disable dummy rncore codegen when compiling with 0.70 or ealier
+    jsRootDir = file("../src/")
+  }
+}

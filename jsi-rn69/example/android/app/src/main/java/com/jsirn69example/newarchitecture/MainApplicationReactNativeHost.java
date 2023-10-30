@@ -19,6 +19,7 @@ import com.facebook.react.fabric.CoreComponentsRegistry;
 import com.facebook.react.fabric.FabricJSIModuleProvider;
 import com.facebook.react.fabric.ReactNativeConfig;
 import com.facebook.react.uimanager.ViewManagerRegistry;
+import com.jsirn69.JsiRn69Module;
 import com.jsirn69example.BuildConfig;
 import com.jsirn69example.newarchitecture.components.MainComponentsRegistry;
 import com.jsirn69example.newarchitecture.modules.MainApplicationTurboModuleManagerDelegate;
@@ -75,6 +76,8 @@ public class MainApplicationReactNativeHost extends ReactNativeHost {
       public List<JSIModuleSpec> getJSIModules(
           final ReactApplicationContext reactApplicationContext,
           final JavaScriptContextHolder jsContext) {
+        reactApplicationContext.getNativeModule(JsiRn69Module.class).nativeInstall(jsContext.get());
+
         final List<JSIModuleSpec> specs = new ArrayList<>();
 
         // Here we provide a new JSIModuleSpec that will be responsible of providing the
