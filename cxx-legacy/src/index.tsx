@@ -18,5 +18,5 @@ const CxxLegacy = NativeModules.CxxLegacy
     );
 
 export function multiply(a: number, b: number): Promise<number> {
-  return CxxLegacy.multiply(a, b);
+  return new Promise((resolve) => CxxLegacy.multiply(a, b, resolve));
 }

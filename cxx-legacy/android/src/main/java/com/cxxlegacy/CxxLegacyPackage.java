@@ -3,6 +3,7 @@ package com.cxxlegacy;
 import androidx.annotation.NonNull;
 
 import com.facebook.react.ReactPackage;
+import com.facebook.react.bridge.CxxModuleWrapper;
 import com.facebook.react.bridge.NativeModule;
 import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
@@ -16,7 +17,7 @@ public class CxxLegacyPackage implements ReactPackage {
   @Override
   public List<NativeModule> createNativeModules(@NonNull ReactApplicationContext reactContext) {
     List<NativeModule> modules = new ArrayList<>();
-    modules.add(new CxxLegacyModule(reactContext));
+    modules.add(CxxModuleWrapper.makeDso("cpp", "createCxxLegacyCxxModule"));
     return modules;
   }
 

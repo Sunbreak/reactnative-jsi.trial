@@ -13,6 +13,7 @@ Pod::Spec.new do |s|
 
   s.platforms    = { :ios => "11.0" }
   s.source       = { :git => "https://github.com/Sunbreak/react-native-cxx-legacy.git", :tag => "#{s.version}" }
+  s.pod_target_xcconfig = { "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/Headers/Private/React-Core\"" }
 
   s.source_files = "ios/**/*.{h,m,mm}", "cpp/**/*.{hpp,cpp,c,h}"
 
@@ -27,7 +28,7 @@ Pod::Spec.new do |s|
   if ENV['RCT_NEW_ARCH_ENABLED'] == '1' then
     s.compiler_flags = folly_compiler_flags + " -DRCT_NEW_ARCH_ENABLED=1"
     s.pod_target_xcconfig    = {
-        "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\"",
+        "HEADER_SEARCH_PATHS" => "\"$(PODS_ROOT)/boost\" \"$(PODS_ROOT)/Headers/Private/React-Core\"",
         "OTHER_CPLUSPLUSFLAGS" => "-DFOLLY_NO_CONFIG -DFOLLY_MOBILE=1 -DFOLLY_USE_LIBCPP=1",
         "CLANG_CXX_LANGUAGE_STANDARD" => "c++17"
     }
